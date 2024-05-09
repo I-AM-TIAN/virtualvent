@@ -9,7 +9,7 @@
   <body>
     <div class="body_div">
       <h2>Bienvenido a VirtualVent</h2>
-      <form method="POST" action="{{ route('/custom-login') }}">
+      <form method="POST" action="{{route('logear.user')}}">
         @csrf
         <div class="form.input">
           <label>Usuario</label>
@@ -17,8 +17,8 @@
             class="login_input"
             type="text"
             required
-            name="username"
-            id="username"
+            name="user_name"
+            id="user_name"
             placeholder="example.example"
             title="usuario"
           />

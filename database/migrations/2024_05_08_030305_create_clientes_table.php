@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('sexo');
             $table->date('fecha_nacimiento');
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

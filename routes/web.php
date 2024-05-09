@@ -11,3 +11,8 @@ Route::get('/formulario-registro', [AuthController::class, 'showRegisterForm'])-
 
 Route::post('/register', [AuthController::class, 'registerUser'])->name('register.user');
 
+Route::get('/login', [AuthController::class, 'index']);
+
+Route::post('/logear', [AuthController::class, 'login'])->name('logear.user');
+
+Route::get('/logados', [AuthController::class, 'logados']);
