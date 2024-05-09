@@ -1,0 +1,110 @@
+body{
+    background: rgb(234, 254, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    background-image: url(C:\Users\alvis\Downloads\virtual.png);
+}   
+
+.body_div{
+    background-color:white;
+    width: 400px;
+    height: 320px;
+    margin: auto; /*Se ajusta al tamaño de la pagina*/
+    margin-top: 20vh;
+    padding: 1% 3%;
+    /*Esto es para modificar el borde*/
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    /*mide el la mitad del alto total
+    height: 50vh; */
+    /*Esto es para que solo se vea */
+    box-shadow: 0px 0px 5px #0006;
+    position: absolute;
+    right: 250px;
+    
+}
+/*
+a{
+    text-decoration: none;/*le Quita la linea de resaltado abajo
+}
+*/
+.form_input{
+    padding: 10px 20px;
+    text-align: center;
+    
+}
+.login_botom{
+background-color: rgb(85, 195, 210);
+font-size: 25px;
+color:azure;
+}
+
+input{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+
+}
+
+form{
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+
+}
+
+h2 {
+    color:rgb(2, 2, 2);
+    font-size: 25px; /*tamaño de la letra*/
+    margin: 0;
+    margin-left: 5%; /*posicion del texto*/
+    text-align: center;
+    
+}
+.div_virt{
+    background-color:rgb(234, 254, 255);
+    width: 400px;
+    height: 200px;
+    margin: auto; /*Se ajusta al tamaño de la pagina*/
+    margin-top: 10vh;
+    padding: 10px 10px;
+    position: absolute;
+    left: 250px;
+    margin-top: 20vh;
+    font-size: 25px;
+}
+a{
+    color:black
+}
+h1{
+    color:rgb(85, 195, 210);
+}
+p{
+    font-size: 20px; 
+}
+
+.div_registro{
+    text-align: center;
+    margin-top: 10vh;
+    
+}
+@media (max-width: 500px) {
+    .body_div{
+        width: 100%;
+        height: auto;
+        position: fixed;
+        right: 0;
+    }
+    .div_virt{
+        width: 50%;
+        height: auto;
+        position: static;
+        left: 0;
+    }
+}
