@@ -16,3 +16,5 @@ Route::get('/login', [AuthController::class, 'index']);
 Route::post('/logear', [AuthController::class, 'login'])->name('logear.user');
 
 Route::get('/logados', [AuthController::class, 'logados']);
+
+Route::post('/logout', [AuthController::class, 'logout']);

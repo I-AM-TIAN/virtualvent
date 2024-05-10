@@ -8,5 +8,10 @@
 </head>
 <body>
     <h1>Te has logeado correctamente</h1>
+
+    <form action="{{ url('/logout') }}" method="POST">
+        @csrf
+        <button type="submit"> Logout </button>
+    </form>
 </body>
 </html>
