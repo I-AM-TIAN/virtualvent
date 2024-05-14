@@ -16,7 +16,7 @@ class TestNotification extends Notification
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
@@ -32,7 +32,7 @@ class TestNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
+    public function toMail(object $notifiable ): MailMessage
     {
         return (new MailMessage)
                     ->line('The introduction to the notification.')

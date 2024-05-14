@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CorporativeController;
 use App\Http\Controllers\SuperUserController;
 
 Route::get('/', function () {
@@ -25,3 +26,7 @@ Route::get('/admin', [AuthController::class, 'admin']);
 Route::get('/corporative', [AuthController::class, 'corporative']);
 
 Route::get('/users', [SuperUserController::class, 'index']);
+
+Route::get('/corporativos', [CorporativeController::class, 'index']);
+
+Route::post('/registrarcorporativo', [CorporativeController::class, 'create'])->name('register.corporative');

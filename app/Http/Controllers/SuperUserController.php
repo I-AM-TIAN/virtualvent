@@ -12,4 +12,8 @@ class SuperUserController extends Controller
 
         return view("auth.SuperUser.users")->with("users", $users);
     }
+
+    public function create(Request $request){
+        
+    }
 }
