@@ -28,7 +28,7 @@ class CorporativeController extends Controller
         $nit = $request->nit;
         $razonsocial = $request->razonsocial;
         $password = Str::random(12);
-
+    
         $empresa = Empresa::find($nit);
         if(isEmpty($empresa)){
              $user = User::create([
@@ -36,7 +36,11 @@ class CorporativeController extends Controller
                 'password' => Hash::make($password),
                 'tipo_usuario_id' => 2,
             ]);
+    
+            // Almacena el ID del usuario y la contraseña
             $userId = $user->id;
+            $userPassword = $password;
+    
             $empresa = Empresa::create([
                 "nit" => $request->nit,
                 "usuarios_id" => $userId,
@@ -44,8 +48,11 @@ class CorporativeController extends Controller
                 "email" => $request->email,
                 "telefono" => $request->telefono,
             ]);
-            $empresa->notify(new TestNotification());
+    
+            // Envia la notificación y pasa el nombre de usuario y la contraseña
+            $empresa->notify(new TestNotification($user->user_name, $userPassword));
         }
         return redirect('/corporativos');
     }
+    
 }

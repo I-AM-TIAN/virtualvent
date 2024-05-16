@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CorporativeController;
 use App\Http\Controllers\SuperUserController;
+use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,3 +31,7 @@ Route::get('/users', [SuperUserController::class, 'index']);
 Route::get('/corporativos', [CorporativeController::class, 'index']);
 
 Route::post('/registrarcorporativo', [CorporativeController::class, 'create'])->name('register.corporative');
+
+Route::get('/registrarse', [ClientController::class, 'MostrarFormulario']);
+
+Route::post('/registrarcliente', [ClientController::class, 'registerClient'])->name('register.client');
