@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tipo_documento_id');
-            $table->foreign('tipo_documento_id')->references('id')->on('tipo_documentos');
-            $table->string('documento');
-            $table->string('nombres');
-            $table->string('apellidos');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('identificacion')->unique();
             $table->string('sexo');
             $table->date('fecha_nacimiento');
-            $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->unsignedBigInteger('tipo_documento');
+            $table->foreign('tipo_documento')->references('id')->on('tipo_documentos');
+            $table->string('email')->unique();
+            $table->string('telefono')->unique();
             $table->timestamps();
         });
     }

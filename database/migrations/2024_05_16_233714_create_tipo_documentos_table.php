@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('direccion_corporativos', function (Blueprint $table) {
+        Schema::create('tipo_documentos', function (Blueprint $table) {
             $table->id();
-            $table->string('detalle');
-            $table->unsignedBigInteger('corporativo_id');
-            $table->foreign('corporativo_id')->references('id')->on('corporativos');
-            $table->timestamps();
+            $table->integer('codigo');
+            $table->string('tipo');
         });
     }
 
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('direccion_corporativos');
+        Schema::dropIfExists('tipo_documentos');
     }
 };

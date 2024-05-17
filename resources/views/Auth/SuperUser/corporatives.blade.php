@@ -48,6 +48,10 @@
                                             </th>
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Direccion
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Editar
                                             </th>
                                         </tr>
@@ -75,6 +79,10 @@
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                                     {{ $corporativo->telefono }}
                                                 </td>
+                                                <td
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $corporativo->direccion_detalle }}
+                                                </td>
                                                 <td class="py-4 px-6 text-sm font-medium whitespace-nowrap">
                                                     <a href="#"
                                                         class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
@@ -92,13 +100,15 @@
                         class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm"
                         onclick="modalHandler(true)">Registrar Nuevo</button>
                 </div>
+                <!--Modal de registrar nuevo usuario corporativo-->
                 <form action="{{ route('register.corporative') }}" method="POST">
                     @csrf
-                    <div class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+                    <div class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0 h-max"
                         id="modal">
                         <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
                             <div class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-                                <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Registro de usuarios corporativos</h1>
+                                <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Registro
+                                    de usuarios corporativos</h1>
                                 <label for="nit"
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">NIT</label>
                                 <input id="nit" name="nit" type="number"
@@ -120,6 +130,23 @@
                                 <input id="telefono" name="telefono" type="number"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                     placeholder="Telefono" />
+                                <label for="dep"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Departamento</label>
+                                <select id="dep"
+                                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                    name="dep" onchange="getMunicipios()" required>
+                                </select>
+                                <label for="mun"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Municipio</label>
+                                <select id="mun"
+                                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                    name="mun" required>
+                                </select>
+                                <label for="direccion"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Direccion</label>
+                                <input id="direccion" name="direccion" type="text"
+                                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                    placeholder="Dirección" />
                                 <div class="flex items-center justify-start w-full">
                                     <button type="submit"
                                         class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Enviar</button>
@@ -139,6 +166,10 @@
                         </div>
                     </div>
                 </form>
+
+                <!--Modal de modificar usuario corporativo-->
+
+                
             </div>
         </div>
     </div>
@@ -179,5 +210,7 @@
 
     modalHandler(false);
 </script>
+
+<script src="{{ url('assets/js/ubicaciones.js') }}"></script>
 
 </html>

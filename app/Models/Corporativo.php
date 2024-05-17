@@ -6,22 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Empresa extends Model
+class Corporativo extends Model
 {
-    use Notifiable;
     use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'nit',
-        'usuarios_id',
         'razon_social',
+        'direccion',
+        'usuario',
         'email',
         'telefono',
     ];
 
-    public function routeNotificationForMail($notification)
-    {
-        // Devuelve la dirección de correo electrónico donde se deben enviar las notificaciones
-        return $this->email;
-    }
 }
