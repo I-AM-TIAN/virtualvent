@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CorporativeController;
 use App\Http\Controllers\SuperUserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,3 +36,5 @@ Route::post('/registrarcorporativo', [CorporativeController::class, 'create'])->
 Route::get('/registrarse', [ClientController::class, 'MostrarFormulario']);
 
 Route::post('/registrarcliente', [ClientController::class, 'registerClient'])->name('register.client');
+
+Route::get('/productos', [ProductoController::class, 'index']);
