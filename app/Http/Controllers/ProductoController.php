@@ -8,21 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
-    public function index(){
-        //obtener todos los productos de la base de datos
-        $productos =  DB::select("SELECT * FROM Productos");
-        //obtener todos las categorias
-        $categorias =  DB::select("SELECT * FROM Categorias");
-        return view("auth.corporative.productos")->with('productos',$productos);
-        return view("auth.corporative.productos")->with('categorias',$categorias);
-        
+  public function index()
+  {
+    // Obtener todos los productos de la base de datos
+    $productos = DB::select("SELECT * FROM Productos");
+    // Obtener todas las categorias
+    $categorias = DB::select("SELECT * FROM Categorias");
+
+    // Retornar la vista con ambas variables
+    return view("auth.corporative.productos")->with([
+      'productos' => $productos,
+      'categorias' => $categorias
+    ]);
+  }
+
+
+  public function admini()
+  {
+    if (Auth::check()) {
+      return view('auth.corporative.index');
     }
 
-    public function admini(){
-		if (Auth::check()) {
-			return view('auth.corporative.index');
-		}
-
-		return redirect('/login');
-    }
+    return redirect('/login');
+  }
 }

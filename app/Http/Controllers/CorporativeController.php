@@ -83,4 +83,8 @@ class CorporativeController extends Controller
         }
         return redirect('/corporativos');
     }
+
+    public function busqueda(){
+        DB::select("")
+    }
 }
