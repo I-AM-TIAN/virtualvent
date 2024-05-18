@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Corporativo;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,8 @@ class ProductoController extends Controller
   public function create(Request $request)
   {
     $user = auth()->user();
+
+    $corporativo = Corporativo::where('id', $user->id)->first();
       Producto::create([
         "nombre" => $request->nombre,
         "descripcion" => $request->descripcion,
@@ -34,9 +37,9 @@ class ProductoController extends Controller
         "pedido_minimo" => $request->pedido_minimo,
         "fecha_entrega" => $request->fecha_entrega,
         "id_categoria" => $request->id_categoria,
-        "id_corporativo" => $user->id,
+        "id_corporativo" => $corporativo->id,
       ]); 
-    return redirect('/corporativos');
+    return redirect('/productos');
   }
 
   public function admini()
