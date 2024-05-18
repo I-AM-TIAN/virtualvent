@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('descripcion');
             $table->integer('disponibilidad');
             $table->float('precio');
+            $table->integer('pedido_minimo');
             $table->date('fecha_entrega');
             $table->unsignedBigInteger('id_categoria');
             $table->foreign('id_categoria')->references('id')->on('categorias');
