@@ -44,3 +44,5 @@ Route::get('/admini', [ProductoController::class, 'admini']);
 Route::get('/productos', [ProductoController::class, 'index']);
 
 Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('register.producto');
+
+Route::post('/buscarproducto', [ProductoController::class, 'busqueda'])->name('find.producto');

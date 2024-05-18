@@ -87,8 +87,21 @@ class CorporativeController extends Controller
     public function busqueda(Request $request){
         $nit = $request->default;
         $razonsocial = $request->default;
-        $corporativos = DB::select("SELECT * FROM corporativos WHERE nit LIKE '$nit' OR razon_social LIKE '$razonsocial'");
-
+    
+        // Utiliza parámetros enlazados para evitar inyecciones SQL
+        $corporativos = DB::select("
+            SELECT 
+                corporativos.*, 
+                users.user_name AS nombre_usuario,
+                direccions.detalle AS direccion_detalle
+            FROM corporativos
+            INNER JOIN users ON corporativos.usuario = users.id
+            INNER JOIN direccions ON corporativos.direccion = direccions.id
+            WHERE corporativos.nit LIKE ? OR corporativos.razon_social LIKE ?
+        ", ["%$nit%", "%$razonsocial%"]);
+    
         return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
+    
+    
 }

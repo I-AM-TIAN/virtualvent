@@ -13,7 +13,13 @@ class ProductoController extends Controller
   public function index()
   {
     // Obtener todos los productos de la base de datos
-    $productos = DB::select("SELECT * FROM Productos");
+    $productos =DB::table('productos')
+    ->join('categorias', 'productos.id_categoria', '=', 'categorias.id')
+    ->select(
+        'productos.*',
+        'categorias.nombre as nombre_categoria',
+    )
+    ->get();
     // Obtener todas las categorias
     $categorias = DB::select("SELECT * FROM Categorias");
 
@@ -50,4 +56,27 @@ class ProductoController extends Controller
 
     return redirect('/login');
   }
+
+  public function busqueda(Request $request){
+    $nombre = $request->default;
+    $categoria = $request->default;
+
+    // Utiliza parámetros enlazados para evitar inyecciones SQL
+    $productos = DB::select("
+        SELECT 
+            productos.*, 
+            categorias.nombre AS nombre_categoria
+        FROM productos
+        INNER JOIN categorias ON productos.id_categoria = categorias.id
+        WHERE productos.nombre LIKE ? OR categorias.nombre LIKE ?
+    ", ["%$nombre%", "%$categoria%"]);
+
+    $categorias = DB::select("SELECT * FROM Categorias");
+
+    return view('auth.corporative.productos')->with([
+      'productos' => $productos,
+      'categorias' => $categorias
+    ]);
+}
+
 }
