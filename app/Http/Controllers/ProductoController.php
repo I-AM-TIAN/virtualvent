@@ -28,7 +28,7 @@ class ProductoController extends Controller
   {
     $user = auth()->user();
 
-    $corporativo = Corporativo::where('id', $user->id)->first();
+    $corporativo = Corporativo::where('usuario', $user->id)->first();
       Producto::create([
         "nombre" => $request->nombre,
         "descripcion" => $request->descripcion,

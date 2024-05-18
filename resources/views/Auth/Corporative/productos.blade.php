@@ -146,7 +146,7 @@
                                 <label for="fecha_entrega"
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fecha
                                     entrega</label>
-                                <input id="fecha_entrega" name="fecha_entrega" type="number"
+                                <input id="fecha_entrega" name="fecha_entrega" type="date"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                     placeholder="dia/mes/año" />
                                 <label for="id_categoria"
