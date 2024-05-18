@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('id_municipio')->references('id')->on('municipios');
             $table->unsignedBigInteger('id_departamento');
             $table->foreign('id_departamento')->references('id')->on('departamentos');
+            $table->timestamps();
         });
     }
 

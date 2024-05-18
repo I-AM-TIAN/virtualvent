@@ -53,6 +53,7 @@ class CorporativeController extends Controller
             $userId = $user->id;
             $userPassword = $password;
 
+            
             $codMun = $request->mun;
             $codDep = $request->dep;
 

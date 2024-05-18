@@ -37,4 +37,6 @@ Route::get('/registrarse', [ClientController::class, 'MostrarFormulario']);
 
 Route::post('/registrarcliente', [ClientController::class, 'registerClient'])->name('register.client');
 
+Route::get('/admini', [ProductoController::class, 'admini']);
+
 Route::get('/productos', [ProductoController::class, 'index']);
