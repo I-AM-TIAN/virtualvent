@@ -24,4 +24,5 @@ class ClientController extends Controller
     $usuario = $request->usuario;
     $cliente = DB::select("SELECT * FROM `clientes` WHERE documento = '$documento' or email = '$email'");
 	}
+  
 }

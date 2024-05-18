@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CorporativeController;
 use App\Http\Controllers\SuperUserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
@@ -46,3 +47,5 @@ Route::get('/productos', [ProductoController::class, 'index']);
 Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('register.producto');
 
 Route::post('/buscarproducto', [ProductoController::class, 'busqueda'])->name('find.producto');
+
+Route::get('/cliente', [ClienteController::class, 'index']);
