@@ -50,10 +50,14 @@
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Fecha de entrega
                                             </th>
-                                            
+
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Fecha modificación
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Categoría
                                             </th>
                                         </tr>
                                     </thead>
@@ -62,32 +66,36 @@
                                             <tr class="hover:bg-gray-100">
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->nombre}}
+                                                    {{ $producto->nombre }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->descripcion}}
+                                                    {{ $producto->descripcion }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->disponibilidad}}
+                                                    {{ $producto->disponibilidad }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->precio}}
+                                                    {{ $producto->precio }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->pedido_minimo}}
+                                                    {{ $producto->pedido_minimo }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->fecha_entrega}}
+                                                    {{ $producto->fecha_entrega }}
                                                 </td>
                                                 <td
-                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                {{ $producto->updated_at}}
-                                            </td>
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $producto->updated_at }}
+                                                </td>
+                                                <td
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $producto->id_categoria }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -128,24 +136,29 @@
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Precio</label>
                                 <input id="precio" name="precio" type="number"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                                    placeholder="Telefono" />
-                                <label for="dep"
-                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Departamento</label>
-                                <select id="dep"
+                                    placeholder="10k" />
+                                <label for="pedido_minimo"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Pedido
+                                    minimo</label>
+                                <input id="pedido_minimo" name="pedido_minimo" type="number"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                                    name="dep" onchange="getMunicipios()" required>
-                                </select>
-                                <label for="mun"
-                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Municipio</label>
-                                <select id="mun"
+                                    placeholder="1" />
+                                <label for="fecha_entrega"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fecha
+                                    entrega</label>
+                                <input id="fecha_entrega" name="fecha_entrega" type="number"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                                    name="mun" required>
-                                </select>
-                                <label for="direccion"
-                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Direccion</label>
-                                <input id="direccion" name="direccion" type="text"
-                                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                                    placeholder="Dirección" />
+                                    placeholder="dia/mes/año" />
+                                <label for="id_categoria"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Categoria</label>
+                                @foreach ($categorias as $categoria)
+                                    <select id="id_categoria"
+                                        class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                        name="id_categoria" required>
+                                    </select>
+                                @endforeach
+
+
                                 <div class="flex items-center justify-start w-full">
                                     <button type="submit"
                                         class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Enviar</button>
@@ -170,7 +183,7 @@
     </div>
     <script>
         let modal = document.getElementById("modal");
-    
+
         function modalHandler(val) {
             if (val) {
                 fadeIn(modal);
@@ -178,7 +191,7 @@
                 fadeOut(modal);
             }
         }
-    
+
         function fadeOut(el) {
             el.style.opacity = 1;
             (function fade() {
@@ -189,7 +202,7 @@
                 }
             })();
         }
-    
+
         function fadeIn(el, display) {
             el.style.opacity = 0;
             el.style.display = display || "flex";
@@ -201,10 +214,10 @@
                 }
             })();
         }
-    
+
         modalHandler(false);
     </script>
-    
+
 </body>
 
 </html>
