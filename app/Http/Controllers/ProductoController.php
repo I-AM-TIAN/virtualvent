@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,22 @@ class ProductoController extends Controller
       'categorias' => $categorias
     ]);
   }
-
+  //funcion registrar producto
+  public function create(Request $request)
+  {
+    $user = auth()->user();
+      Producto::create([
+        "nombre" => $request->nombre,
+        "descripcion" => $request->descripcion,
+        "disponibilidad" => $request->disponibilidad,
+        "precio" => $request->precio,
+        "pedido_minimo" => $request->pedido_minimo,
+        "fecha_entrega" => $request->fecha_entrega,
+        "id_categoria" => $request->id_categoria,
+        "id_corporativo" => $user->id,
+      ]); 
+    return redirect('/corporativos');
+  }
 
   public function admini()
   {

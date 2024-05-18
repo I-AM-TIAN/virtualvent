@@ -34,7 +34,7 @@ class CorporativeController extends Controller
 
         return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
-
+    //Funcion para crear un nuevo usuario corporativo
     public function create(Request $request)
     {
         $nit = $request->nit;
