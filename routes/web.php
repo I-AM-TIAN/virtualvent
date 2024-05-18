@@ -40,3 +40,5 @@ Route::post('/registrarcliente', [ClientController::class, 'registerClient'])->n
 Route::get('/admini', [ProductoController::class, 'admini']);
 
 Route::get('/productos', [ProductoController::class, 'index']);
+
+Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('register.producto');

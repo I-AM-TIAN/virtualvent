@@ -109,7 +109,7 @@
                         class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm"
                         onclick="modalHandler(true)">Registrar Nuevo</button>
                 </div>
-                <form action="{{ route('register.corporative') }}" method="POST">
+                <form action="{{ route('register.producto') }}" method="POST">
                     @csrf
                     <div class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0 h-max"
                         id="modal">
