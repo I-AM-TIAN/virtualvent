@@ -31,6 +31,8 @@ Route::get('/users', [SuperUserController::class, 'index']);
 
 Route::get('/corporativos', [CorporativeController::class, 'index']);
 
+Route::post('/buscarcorporativo', [CorporativeController::class, 'busqueda'])->name('find.corporative');
+
 Route::post('/registrarcorporativo', [CorporativeController::class, 'create'])->name('register.corporative');
 
 Route::get('/registrarse', [ClientController::class, 'MostrarFormulario']);

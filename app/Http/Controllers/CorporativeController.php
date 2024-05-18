@@ -84,7 +84,11 @@ class CorporativeController extends Controller
         return redirect('/corporativos');
     }
 
-    public function busqueda(){
-        DB::select("")
+    public function busqueda(Request $request){
+        $nit = $request->default;
+        $razonsocial = $request->default;
+        $corporativos = DB::select("SELECT * FROM corporativos WHERE nit LIKE '$nit' OR razon_social LIKE '$razonsocial'");
+
+        return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
 }
