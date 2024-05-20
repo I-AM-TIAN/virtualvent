@@ -13,8 +13,8 @@
         @csrf
         <div class="forminputselec">
           <label>Tipo de documento</label>
-          <select name="select_div" >
-            <option value="Cedula">Seleciona</option>
+          <select name="select_doc" required>
+            <option value="0">Seleciona</option>
             <option value="1">Cedula</option>
             <option value="2">Tarjeta de identidad</option>
           </select>
@@ -55,13 +55,13 @@
           <label>Sexo</label>
           <select name="select_div" >
             <option value="select">Seleciona</option>
-            <option value="femenino">Femenino</option>
+            <option value="Femenino">Femenino</option>
             <option value="Masculino">Masculino</option>
           </select>
         </div>
         <div class="forminput">
           <label>Fecha de nacimiento</label>
-          <input class="login_input" type="date" requerid name="numbercell">
+          <input class="login_input" type="date" requerid name="fechanac">
         </div>
         <input class="login_botom" type="submit" value="Registrar">
       </form>

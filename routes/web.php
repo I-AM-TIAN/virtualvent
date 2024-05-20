@@ -48,4 +48,6 @@ Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('
 
 Route::post('/buscarproducto', [ProductoController::class, 'busqueda'])->name('find.producto');
 
-Route::get('/cliente', [ClienteController::class, 'index']);
+Route::get('/cliente', [ClientController::class, 'index']);
+
+Route::post('/modificarcorporativo', [CorporativeController::class, 'modify'])->name('modificar.corporative');

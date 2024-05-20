@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreign('tipo_documento')->references('id')->on('tipo_documentos');
             $table->string('email')->unique();
             $table->string('telefono')->unique();
+            $table->unsignedBigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });
     }
