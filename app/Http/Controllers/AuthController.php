@@ -24,12 +24,14 @@ class AuthController extends Controller
 			'tipo_usuario_id' => 1,
 		]);
 
-		$credentials = $request->only('user_name', 'password');
-		Auth::attempt($credentials);
+		return redirect('/users');
+	}
 
-		$request->session()->regenerate();
+	public function list()
+	{
+		$users = DB::select("SELECT * FROM `users` WHERE tipo_usuario_id = 1");
 
-		redirect("/users");
+		return view("auth.SuperUser.users")->with("users", $users);
 	}
 
 	public function index()
@@ -52,7 +54,7 @@ class AuthController extends Controller
 			'user_name' => 'required',
 			'password' => 'required',
 		]);
-		
+
 		$credentials = $request->only('user_name', 'password', 'tipo_usuario_id');
 
 		if (Auth::attempt($credentials)) {

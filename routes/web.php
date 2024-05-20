@@ -28,7 +28,7 @@ Route::get('/admin', [AuthController::class, 'admin']);
 
 Route::get('/corporative', [AuthController::class, 'corporative']);
 
-Route::get('/users', [SuperUserController::class, 'index']);
+Route::get('/users', [AuthController::class, 'list']);
 
 Route::get('/corporativos', [CorporativeController::class, 'index']);
 
