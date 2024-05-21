@@ -142,7 +142,7 @@
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">NIT</label>
                                 <input id="nit" name="nit" type="number"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                                    placeholder="Usuario" value="{{ $corporativo->nit }}" />
+                                    placeholder="Usuario"/>
                                 <label for="razonsocial"
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Razon
                                     Social</label>
