@@ -53,7 +53,7 @@ class CorporativeController extends Controller
             $userId = $user->id;
             $userPassword = $password;
 
-            
+
             $codMun = $request->mun;
             $codDep = $request->dep;
 
@@ -84,10 +84,11 @@ class CorporativeController extends Controller
         return redirect('/corporativos');
     }
 
-    public function busqueda(Request $request){
+    public function busqueda(Request $request)
+    {
         $nit = $request->default;
         $razonsocial = $request->default;
-    
+
         // Utiliza parámetros enlazados para evitar inyecciones SQL
         $corporativos = DB::select("
             SELECT 
@@ -99,19 +100,32 @@ class CorporativeController extends Controller
             INNER JOIN direccions ON corporativos.direccion = direccions.id
             WHERE corporativos.nit LIKE ? OR corporativos.razon_social LIKE ?
         ", ["%$nit%", "%$razonsocial%"]);
-    
+
         return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
-    
-    public function modify(Request $request){
-        DB::update("update corporativos set nit=?, razon_social=?, email=?, telefono=? where id=? ", [
-            $request->nit,
-            $request->razonsocial,
-            $request->email,
-            $request->telefono,
-            $request->id,
-        ]);
-        return redirect('/corporativos');
+
+    public function modify(Request $request)
+    {
+        // Encontrar el corporativo por su ID
+        $corporativo = Corporativo::find($request->id);
+
+        // Verificar si el corporativo existe
+        if ($corporativo) {
+            // Actualizar los campos del corporativo
+            $corporativo->nit = $request->nit;
+            $corporativo->razon_social = $request->razonsocial;
+            $corporativo->email = $request->email;
+            $corporativo->direccion = 1;
+            $corporativo->telefono = $request->telefono;
+
+            // Guardar los cambios en la base de datos
+            $corporativo->save();
+
+            // Redirigir con un mensaje de éxito
+            return redirect('/corporativos')->with('success', 'Corporativo actualizado correctamente.');
+        } else {
+            // Redirigir con un mensaje de error si el corporativo no se encuentra
+            return redirect('/corporativos')->with('error', 'Corporativo no encontrado.');
+        }
     }
-    
 }

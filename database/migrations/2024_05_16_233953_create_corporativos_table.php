@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('usuario')->references('id')->on('users');
             $table->string('email')->unique();
             $table->string('telefono')->unique();
+            $table->string('estado');
             $table->timestamps();
         });
     }
