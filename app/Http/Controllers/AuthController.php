@@ -67,8 +67,9 @@ class AuthController extends Controller
 					return redirect("/corporative")->withSuccess('Has iniciado sesión');
 					break;
 				case 3:
-						return redirect("/")->withSuccess('Has iniciado sesión');
-						break;
+					$productos = DB::select("SELECT * FROM productos");
+					return view("welcome")->with("productos", $productos);
+					break;
 			}
 		}
 
