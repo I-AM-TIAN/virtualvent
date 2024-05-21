@@ -66,6 +66,9 @@ class AuthController extends Controller
 				case 2:
 					return redirect("/corporative")->withSuccess('Has iniciado sesión');
 					break;
+				case 3:
+						return redirect("/")->withSuccess('Has iniciado sesión');
+						break;
 			}
 		}
 

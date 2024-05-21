@@ -33,7 +33,7 @@
 <img src="" alt="Logo" title="Logo pendiente"> -->
       <div class="div_registro">
         <label>¿Aún no tienes cuenta?</label>
-        <a href="/formulario-registro" target="_blank">Registrate</a>
+        <a href="/registrarse">Registrate</a>
       </div>
     </div>
     <div class="div_virt">

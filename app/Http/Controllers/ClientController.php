@@ -47,11 +47,15 @@ class ClientController extends Controller
       ]);
     }
 
-    return redirect('/cliente');
+    return redirect('/');
   }
 
   public function index()
-  {
-    return view('auth.cliente.index');
+  { 
+    $user= auth()->user();
+    $cliente = Cliente::where('id_usuario', $user->id)->get();
+    
+    return view('auth.cliente.index')->with("cliente", $cliente);
   }
+
 }

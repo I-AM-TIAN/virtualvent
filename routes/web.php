@@ -60,3 +60,5 @@ Route::put("/modificar-producto/{id}",[ProductoController::class,"update"])->nam
 Route::get('/cliente', [ClientController::class, 'index']);
 
 Route::put('/modificarcorporativo/{id}', [CorporativeController::class, 'update'])->name('update.corporative');
+
+Route::put('/modificarcliente/{id}', [ClientController::class, 'update'])->name('update.cliente');
