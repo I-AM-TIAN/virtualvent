@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CorporativeController;
 use App\Http\Controllers\SuperUserController;
 use App\Http\Controllers\ClientController;
@@ -43,6 +44,8 @@ Route::post('/registrarcliente', [ClientController::class, 'registerClient'])->n
 Route::get('/admini', [ProductoController::class, 'admini']);
 
 Route::get('/productos', [ProductoController::class, 'index']);
+
+Route::get('/categorias', [CategoriaController::class, 'index']);
 
 Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('register.producto');
 
