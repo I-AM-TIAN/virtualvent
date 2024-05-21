@@ -57,14 +57,16 @@
                         </div>
                         
                     <!-- Botón para abrir el modal -->
+                    
+                </div>
+                <div class="flex items-center justify-center min-h-screen">
+                    <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                        Registrar Nueva Categoría
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center justify-center min-h-screen">
-                <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-                    Registrar Nueva Categoría
-                </button>
-            </div>
-<<<<<<< HEAD
+            
+
             <form class="mt-5" method="POST" action="{{route('register.category')}}">
                 @csrf
                 <div class="mb-4">
@@ -72,7 +74,7 @@
                         Categoría</label>
                     <input type="text" id="categoria" name="categoria"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-=======
+
             <!-- Modal -->
             <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
                 <div
@@ -89,9 +91,9 @@
                     </div>
                     <form class="mt-5">
                         <div class="mb-4">
-                            <label for="categoryName" class="block text-sm font-medium text-gray-700">Nombre de la
+                            <label for="categoria" class="block text-sm font-medium text-gray-700">Nombre de la
                                 Categoría</label>
-                            <input type="text" id="categoryName" name="categoryName"
+                            <input type="text" id="categoria" name="categoria"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         </div>
                         <div class="mt-4">
@@ -101,7 +103,7 @@
                             </button>
                         </div>
                     </form>
->>>>>>> de0589a5df5382ac7638c0de9a438bc27723a8c2
+
                 </div>
             </div>
 
