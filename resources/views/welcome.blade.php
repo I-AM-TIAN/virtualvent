@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inicio</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Esta será la página principal</h1>
+    <body>
+        @include('auth.cliente.includes.navbar')
+    
+        <div class="w-full flex">
+            <div class="w-auto">
+                @include('auth.cliente.includes.aside')
+            </div>
+            <div class="w-auto">
+                @include('auth.cliente.includes.productlist')
+            </div>
+        </div>
+    </body>
 </body>
 </html>
