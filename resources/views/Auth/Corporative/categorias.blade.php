@@ -53,7 +53,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
                         </div>
                         
                     <!-- Botón para abrir el modal -->
@@ -107,29 +106,29 @@
                 </div>
             </div>
 
-            <script>
-                // Obtener los elementos del DOM
-                const openModalBtn = document.getElementById('openModalBtn');
-                const closeModalBtn = document.getElementById('closeModalBtn');
-                const modal = document.getElementById('modal');
+    <script>
+        // Obtener los elementos del DOM
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('modal');
 
-                // Función para abrir el modal
-                openModalBtn.addEventListener('click', () => {
-                    modal.classList.remove('hidden');
-                });
+        // Función para abrir el modal
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
 
-                // Función para cerrar el modal
-                closeModalBtn.addEventListener('click', () => {
-                    modal.classList.add('hidden');
-                });
+        // Función para cerrar el modal
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
 
-                // Cerrar el modal si se hace clic fuera de él
-                window.addEventListener('click', (event) => {
-                    if (event.target === modal) {
-                        modal.classList.add('hidden');
-                    }
-                });
-            </script>
+        // Cerrar el modal si se hace clic fuera de él
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>

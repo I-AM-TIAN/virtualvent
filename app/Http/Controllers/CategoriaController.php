@@ -16,7 +16,7 @@ class CategoriaController extends Controller
 
     public function create(Request $request){
         Categoria::create([
-            "nombre" => $request->categoria
+            "nombre" => $request->categoria,
         ]);
 
         return redirect("/categorias");
