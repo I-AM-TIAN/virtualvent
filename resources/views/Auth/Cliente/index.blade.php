@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,18 @@
     <title>Virtual Cliente</title>
     @vite('resources/css/app.css')
 </head>
+
 <body>
-    
-    @include('auth.cliente.includes.aside')
     @include('auth.cliente.includes.navbar')
-    @include('auth.cliente.includes.productlist')
 
-
+    <div class="w-full flex">
+        <div class="w-auto">
+            @include('auth.cliente.includes.aside')
+        </div>
+        <div class="w-auto">
+            @include('auth.cliente.includes.productlist')
+        </div>
+    </div>
 </body>
+
 </html>
