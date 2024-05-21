@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('precio');
             $table->integer('pedido_minimo');
             $table->date('fecha_entrega');
+            $table->string('imagen');
             $table->unsignedBigInteger('id_categoria');
             $table->foreign('id_categoria')->references('id')->on('categorias');
             $table->unsignedBigInteger('id_corporativo');

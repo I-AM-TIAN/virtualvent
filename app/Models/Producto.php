@@ -15,8 +15,11 @@ class Producto extends Model
         "precio",
         "pedido_minimo",
         "fecha_entrega",
+        "imagen",
         "id_categoria",
         "id_corporativo",
     ];
+
+    
 
 }

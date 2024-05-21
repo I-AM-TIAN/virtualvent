@@ -104,28 +104,20 @@ class CorporativeController extends Controller
         return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
 
-    public function modify(Request $request)
-    {
-        // Encontrar el corporativo por su ID
-        $corporativo = Corporativo::find($request->id);
+    public function update(Request $request, $id){
+        $corporativo = Corporativo::find($id);
 
-        // Verificar si el corporativo existe
-        if ($corporativo) {
-            // Actualizar los campos del corporativo
-            $corporativo->nit = $request->nit;
-            $corporativo->razon_social = $request->razonsocial;
-            $corporativo->email = $request->email;
-            $corporativo->direccion = 1;
-            $corporativo->telefono = $request->telefono;
+        // Actualizar los campos con los nuevos datos
+        $corporativo->nit = $request->input('nit');
+        $corporativo->razon_social = $request->input('razon_social');
+        $corporativo->email = $request->input('email');
+        $corporativo->telefono = $request->input('telefono');
+        $corporativo->estado = $request->input('estado');
+    
+        // Guardar los cambios en la base de datos
+        $corporativo->save();
 
-            // Guardar los cambios en la base de datos
-            $corporativo->save();
-
-            // Redirigir con un mensaje de éxito
-            return redirect('/corporativos')->with('success', 'Corporativo actualizado correctamente.');
-        } else {
-            // Redirigir con un mensaje de error si el corporativo no se encuentra
-            return redirect('/corporativos')->with('error', 'Corporativo no encontrado.');
-        }
+        return redirect("/corporativos");
+    
     }
 }

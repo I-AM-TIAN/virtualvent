@@ -72,6 +72,10 @@
                                             </th>
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Estado
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Editar
                                             </th>
                                         </tr>
@@ -103,10 +107,14 @@
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                                     {{ $corporativo->direccion_detalle }}
                                                 </td>
+                                                <td
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $corporativo->estado }}
+                                                </td>
                                                 <td class="py-4 px-6 text-sm font-medium whitespace-nowrap">
                                                     <a href="#"
                                                         class="text-blue-600 dark:text-blue-500 hover:underline"
-                                                        data-modal-toggle="authentication-modal">Edit</a>
+                                                        data-modal-toggle="authentication-modal-{{ $corporativo->id }}">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -190,37 +198,9 @@
 
                 <!--Modal de modificar usuario corporativo-->
                 <div class="max-w-2xl mx-auto">
-
-                    <!-- Main modal -->
-                    <div id="authentication-modal" aria-hidden="true"
-                        class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
-                        <div class="relative w-full max-w-md px-4 h-full md:h-auto">
-                            <!-- Modal content -->
-                            <div class="bg-white rounded-lg shadow relative dark:bg-gray-700">
-                                <div class="flex justify-end p-2">
-                                    <button type="button"
-                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                        data-modal-toggle="authentication-modal">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.4w14 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <form class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="#">
-                                    <h3 class="text-xl font-medium text-gray-900 dark:text-white">Modificar usuario
-                                        corporativo</h3>
-                                    <div>
-                                        <label for="nit"
-                                            class="text-sm font-medium text-gray-900 block mb-2 dark:text-gray-300">Nit</label>
-                                        <input type="number" name="nit" id="nit"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                            placeholder="258" required="">
                     @foreach ($corporativos as $corporativo)
                         <!-- Main modal -->
-                        <div id="authentication-modal" aria-hidden="true"
+                        <div id="authentication-modal-{{ $corporativo->id }}" aria-hidden="true"
                             class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
                             <div class="relative w-full max-w-md px-4 h-full md:h-auto">
                                 <!-- Modal content -->
@@ -228,7 +208,7 @@
                                     <div class="flex justify-end p-2">
                                         <button type="button"
                                             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                            data-modal-toggle="authentication-modal">
+                                            data-modal-toggle="authentication-modal-{{ $corporativo->id }}">
                                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
@@ -236,64 +216,62 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </button>
->>>>>>> 3e658f9b759788a8b8852157b5466d8032b384f8
                                     </div>
-                                    <form class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8" action="{{ route('modificar.corporative') }}" method="POST">
+                                    <form class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8"
+                                        action="{{ route('update.corporative', $corporativo->id) }}" method="POST">
                                         @csrf
-                                        <h3 class="text-xl font-medium text-gray-900 ">Modificar usuario
-                                            corporativo</h3>
+                                        @method('put')
+                                        <h3 class="text-xl font-medium text-gray-900 ">Modificar corporativo</h3>
                                         <div>
                                             <label for="id"
                                                 class="text-sm font-medium text-gray-900 block mb-2 ">Id</label>
                                             <input type="number" name="id" id="id"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                placeholder="258" required value="{{$corporativo->id}}" disabled>
+                                                placeholder="258" required value="{{ $corporativo->id }}" disabled>
                                         </div>
                                         <div>
                                             <label for="nit"
-                                                class="text-sm font-medium text-gray-900 block mb-2 ">Nit</label>
+                                                class="text-sm font-medium text-gray-900 block mb-2 ">NIT</label>
                                             <input type="number" name="nit" id="nit"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                placeholder="258" required value="{{$corporativo->nit}}">
+                                                placeholder="" required value="{{ $corporativo->nit }}">
                                         </div>
                                         <div>
-                                            <label for="razonsocial"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Razon
-                                                social
+                                            <label for="razon_social"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Razon Social
                                             </label>
-                                            <input type="text" name="razonsocial" id="razonsocial"
-                                                placeholder="Marmola"
+                                            <input type="text" name="razon_social" id="razon_social"
+                                                placeholder=""
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                required value="{{$corporativo->razon_social}}">
+                                                required value="{{ $corporativo->razon_social }}">
                                         </div>
                                         <div>
                                             <label for="email"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Correo
-                                                electronico
+                                                class="text-sm font-medium text-gray-900 block mb-2">Email
                                             </label>
-                                            <input type="email" name="email" id="email"
-                                                placeholder="example@example.com"
+                                            <input type="email" name="email" id="email" placeholder=""
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                required value="{{$corporativo->email}}">
+                                                required value="{{ $corporativo->email }}">
                                         </div>
                                         <div>
                                             <label for="telefono"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Número
-                                                de contacto
+                                                class="text-sm font-medium text-gray-900 block mb-2">Telefono
                                             </label>
                                             <input type="number" name="telefono" id="telefono"
-                                                placeholder="3*********"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                required value="{{$corporativo->telefono}}">
-                                        </div>
-                                        <div>
-                                            <label for="direccion"
-                                                class="text-sm font-medium text-gray-900 block mb-2">Direccion
-                                            </label>
-                                            <input type="text" name="direccion" id="direccion"
                                                 placeholder="Marmola"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                required value="{{$corporativo->direccion}}">
+                                                required value="{{ $corporativo->telefono }}">
+                                        </div>
+                                        <div>
+                                            <label for="estado"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Estado
+                                            </label>
+                                            <select id="estado"
+                                                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                                name="estado" required>
+                                               <option value="Activo">Activo</option>
+                                               <option value="Inactivo">Inactivo</option>
+                                            </select>
                                         </div>
                                         <div>
                                             <button type="submit"
@@ -305,7 +283,6 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
 
             </div>

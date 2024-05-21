@@ -13,13 +13,13 @@ class ProductoController extends Controller
   public function index()
   {
     // Obtener todos los productos de la base de datos
-    $productos =DB::table('productos')
-    ->join('categorias', 'productos.id_categoria', '=', 'categorias.id')
-    ->select(
+    $productos = DB::table('productos')
+      ->join('categorias', 'productos.id_categoria', '=', 'categorias.id')
+      ->select(
         'productos.*',
         'categorias.nombre as nombre_categoria',
-    )
-    ->get();
+      )
+      ->get();
     // Obtener todas las categorias
     $categorias = DB::select("SELECT * FROM Categorias");
 
@@ -33,18 +33,22 @@ class ProductoController extends Controller
   public function create(Request $request)
   {
     $user = auth()->user();
-
     $corporativo = Corporativo::where('usuario', $user->id)->first();
-      Producto::create([
-        "nombre" => $request->nombre,
-        "descripcion" => $request->descripcion,
-        "disponibilidad" => $request->disponibilidad,
-        "precio" => $request->precio,
-        "pedido_minimo" => $request->pedido_minimo,
-        "fecha_entrega" => $request->fecha_entrega,
-        "id_categoria" => $request->id_categoria,
-        "id_corporativo" => $corporativo->id,
-      ]); 
+    $image = $request->file('photo');
+    $image->move('uploads', $image->getClientOriginalName());
+
+    Producto::create([
+      "nombre" => $request->nombre,
+      "descripcion" => $request->descripcion,
+      "disponibilidad" => $request->disponibilidad,
+      "precio" => $request->precio,
+      "pedido_minimo" => $request->pedido_minimo,
+      "fecha_entrega" => $request->fecha_entrega,
+      "imagen" => $image->getClientOriginalName(),
+      "id_categoria" => $request->id_categoria,
+      "id_corporativo" => $corporativo->id,
+    ]);
+
     return redirect('/productos');
   }
 
@@ -57,7 +61,8 @@ class ProductoController extends Controller
     return redirect('/login');
   }
 
-  public function busqueda(Request $request){
+  public function busqueda(Request $request)
+  {
     $nombre = $request->default;
     $categoria = $request->default;
 
@@ -77,6 +82,29 @@ class ProductoController extends Controller
       'productos' => $productos,
       'categorias' => $categorias
     ]);
-}
+  }
 
+  public function delete($id)
+  {
+    try {
+      $sql = DB::delete('delete from productos where id=?', [
+        $id
+      ]);
+    } catch (\Throwable $th) {
+      $sql = 0;
+    }
+    if ($sql == true) {
+      return back()->with("correcto", "Usuario eliminado correctamente");
+    } else {
+      return back()->with("incorrecto", "Error al eliminar");
+    }
+  }
+
+  public function update(Request $request, $id)
+  {
+    $producto = Producto::find($id);
+    $producto->update($request->all());
+
+    return redirect("/productos");
+  }
 }

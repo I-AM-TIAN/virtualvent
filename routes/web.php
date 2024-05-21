@@ -48,6 +48,10 @@ Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('
 
 Route::post('/buscarproducto', [ProductoController::class, 'busqueda'])->name('find.producto');
 
+Route::get("/eliminar-producto-{id}",[ProductoController::class,"delete"])->name("producto.delete");
+
+Route::put("/modificar-producto/{id}",[ProductoController::class,"update"])->name("producto.update");
+
 Route::get('/cliente', [ClientController::class, 'index']);
 
-Route::post('/modificarcorporativo', [CorporativeController::class, 'modify'])->name('modificar.corporative');
+Route::put('/modificarcorporativo/{id}', [CorporativeController::class, 'update'])->name('update.corporative');

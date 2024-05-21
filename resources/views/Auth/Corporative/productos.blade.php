@@ -10,6 +10,12 @@
 </head>
 
 <body>
+    <script>
+        var res = function() {
+            var not = confirm("¿Estás seguro de eliminar?");
+            return not;
+        }
+    </script>
     <div class="flex">
         <div class="w-auto">
             @include('auth.corporative.includes.sidebar')
@@ -73,11 +79,15 @@
 
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                                                Fecha modificación
+                                                Foto
                                             </th>
                                             <th scope="col"
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Categoría
+                                            </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Acciones
                                             </th>
                                         </tr>
                                     </thead>
@@ -94,9 +104,7 @@
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ 
-                                                    $disponible = $producto->disponibilidad;
-                                                    }}
+                                                    {{ $disponible = $producto->disponibilidad }}
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
@@ -112,11 +120,20 @@
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $producto->updated_at }}
+                                                    <img class="h-26 w-auto"
+                                                        src="{{ asset('uploads/' . $producto->imagen) }}"
+                                                        alt="{{ $producto->nombre }}">
                                                 </td>
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                                     {{ $producto->nombre_categoria }}
+                                                </td>
+                                                <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                                    <a href="{{ route('producto.delete', $producto->id) }}"
+                                                        onclick="return res()" class="text-red-500">Eliminar</a>
+                                                    <a href="#"
+                                                        class="text-blue-600 dark:text-blue-500 hover:underline"
+                                                        data-modal-toggle="authentication-modal-{{ $producto->id }}"">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -131,7 +148,8 @@
                         class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm"
                         onclick="modalHandler(true)">Registrar Nuevo</button>
                 </div>
-                <form action="{{ route('register.producto') }}" method="POST">
+                <!-- Modal de registrar usuario corporativo -->
+                <form action="{{ route('register.producto') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0 h-max"
                         id="modal">
@@ -171,6 +189,13 @@
                                 <input id="fecha_entrega" name="fecha_entrega" type="date"
                                     class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                     placeholder="dia/mes/año" />
+
+                                <label for="images"
+                                    class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Seleccione
+                                    fotos</label>
+                                <input id="photo" name="photo" type="file"
+                                    class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                                    accept="image/*" />
                                 <label for="id_categoria"
                                     class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Categoria</label>
                                 <select id="id_categoria"
@@ -199,45 +224,148 @@
                         </div>
                     </div>
                 </form>
+                <!--Modal de modificar usuario corporativo-->
+                <div class="max-w-2xl mx-auto">
+                    @foreach ($productos as $producto)
+                        <!-- Main modal -->
+                        <div id="authentication-modal-{{ $producto->id }}" aria-hidden="true"
+                            class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
+                            <div class="relative w-full max-w-md px-4 h-full md:h-auto">
+                                <!-- Modal content -->
+                                <div class="bg-white rounded-lg shadow relative">
+                                    <div class="flex justify-end p-2">
+                                        <button type="button"
+                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                            data-modal-toggle="authentication-modal-{{$producto->id}}">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <form class="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8"
+                                        action="{{ route('producto.update', $producto->id) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <h3 class="text-xl font-medium text-gray-900 ">Modificar producto</h3>
+                                        <div>
+                                            <label for="id"
+                                                class="text-sm font-medium text-gray-900 block mb-2 ">Id</label>
+                                            <input type="number" name="id" id="id"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                placeholder="258" required value="{{ $producto->id }}" disabled>
+                                        </div>
+                                        <div>
+                                            <label for="descripcion"
+                                                class="text-sm font-medium text-gray-900 block mb-2 ">Descripción</label>
+                                            <input type="text" name="descripcion" id="descripcion"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                placeholder="" required value="{{ $producto->descripcion }}">
+                                        </div>
+                                        <div>
+                                            <label for="fotos"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Foto del producto
+                                            </label>
+                                            <input type="file" accept="image/*" name="fotos" id="fotos"
+                                                placeholder=""
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                value="{{ $producto->imagen }}">
+                                        </div>
+                                        <div>
+                                            <label for="disponibilidad"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Disponibilidad
+                                            </label>
+                                            <input type="number" name="disponibilidad" id="disponibilidad"
+                                                placeholder=""
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                required value="{{ $producto->disponibilidad }}">
+                                        </div>
+                                        <div>
+                                            <label for="precio"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Precio
+                                            </label>
+                                            <input type="number" name="precio" id="precio"
+                                                placeholder=""
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                required value="{{ $producto->precio }}">
+                                        </div>
+                                        <div>
+                                            <label for="pedido_minimo"
+                                                class="text-sm font-medium text-gray-900 block mb-2">Pedido minimo
+                                            </label>
+                                            <input type="number" name="pedido_minimo" id="pedido_minimo"
+                                                placeholder="Marmola"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                required value="{{ $producto->pedido_minimo }}">
+                                        </div>
+                                        <div>
+                                            <button type="submit"
+                                                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Modificar
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    </div>
-    <script>
-        let modal = document.getElementById("modal");
+            <script>
+                let modal = document.getElementById("modal");
 
-        function modalHandler(val) {
-            if (val) {
-                fadeIn(modal);
-            } else {
-                fadeOut(modal);
-            }
-        }
-
-        function fadeOut(el) {
-            el.style.opacity = 1;
-            (function fade() {
-                if ((el.style.opacity -= 0.1) < 0) {
-                    el.style.display = "none";
-                } else {
-                    requestAnimationFrame(fade);
+                function modalHandler(val) {
+                    if (val) {
+                        fadeIn(modal);
+                    } else {
+                        fadeOut(modal);
+                    }
                 }
-            })();
-        }
 
-        function fadeIn(el, display) {
-            el.style.opacity = 0;
-            el.style.display = display || "flex";
-            (function fade() {
-                let val = parseFloat(el.style.opacity);
-                if (!((val += 0.2) > 1)) {
-                    el.style.opacity = val;
-                    requestAnimationFrame(fade);
+                function fadeOut(el) {
+                    el.style.opacity = 1;
+                    (function fade() {
+                        if ((el.style.opacity -= 0.1) < 0) {
+                            el.style.display = "none";
+                        } else {
+                            requestAnimationFrame(fade);
+                        }
+                    })();
                 }
-            })();
-        }
 
-        modalHandler(false);
-    </script>
+                function fadeIn(el, display) {
+                    el.style.opacity = 0;
+                    el.style.display = display || "flex";
+                    (function fade() {
+                        let val = parseFloat(el.style.opacity);
+                        if (!((val += 0.2) > 1)) {
+                            el.style.opacity = val;
+                            requestAnimationFrame(fade);
+                        }
+                    })();
+                }
+
+                modalHandler(false);
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const modalToggles = document.querySelectorAll('[data-modal-toggle]');
+                    modalToggles.forEach(toggle => {
+                        toggle.addEventListener('click', function() {
+                            const modalId = this.getAttribute('data-modal-toggle');
+                            const modal = document.getElementById(modalId);
+                            if (modal.classList.contains('hidden')) {
+                                modal.classList.remove('hidden');
+                                modal.classList.add('flex');
+                            } else {
+                                modal.classList.add('hidden');
+                                modal.classList.remove('flex');
+                            }
+                        });
+                    });
+                });
+            </script>
 
 </body>
 
