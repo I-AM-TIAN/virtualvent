@@ -45,9 +45,9 @@
                                                     {{ $categoria->nombre }}
                                                 </td>
                                                 <td
-                                                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                {{ $categoria->created_at }}
-                                            </td>
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $categoria->created_at }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -58,11 +58,13 @@
                 </div>
             </div>
         </div>
+        <!-- Botón para abrir el modal -->
+        <div class="flex items-center justify-center min-h-screen">
+            <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                Registrar Nueva Categoría
+            </button>
+        </div>
     </div>
-    <!-- Botón para abrir el modal -->
-    <button id="openModalBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-        Registrar Nueva Categoría
-    </button>
 
     <!-- Modal -->
     <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
@@ -77,7 +79,7 @@
                     </svg>
                 </button>
             </div>
-            <form class="mt-5" method="POST" action="{{route('register.category')}}">
+            <form class="mt-5" method="POST" action="{{ route('register.category') }}">
                 @csrf
                 <div class="mb-4">
                     <label for="categoria" class="block text-sm font-medium text-gray-700">Nombre de la
