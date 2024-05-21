@@ -10,6 +10,8 @@
 </head>
 
 <body>
+    @include('auth.cliente.includes.aside')
+    @include('auth.cliente.includes.navbar')
     <div class="w-80 bg-white shadow rounded">
         <div class="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
             style="background-image: url('https://images.pexels.com/photos/7989741/pexels-photo-7989741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
