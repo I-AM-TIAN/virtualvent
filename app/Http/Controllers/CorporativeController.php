@@ -103,5 +103,15 @@ class CorporativeController extends Controller
         return view('auth.superuser.corporatives')->with('corporativos', $corporativos);
     }
     
+    public function modify(Request $request){
+        DB::update("update corporativos set nit=?, razon_social=?, email=?, telefono=? where id=? ", [
+            $request->nit,
+            $request->razonsocial,
+            $request->email,
+            $request->telefono,
+            $request->id,
+        ]);
+        return redirect('/corporativos');
+    }
     
 }
