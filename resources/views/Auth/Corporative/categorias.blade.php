@@ -31,6 +31,10 @@
                                                 class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                                 Nombre
                                             </th>
+                                            <th scope="col"
+                                                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                                Fecha de creacion
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
@@ -39,6 +43,10 @@
                                                 <td
                                                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                                     {{ $categoria->nombre }}
+                                                </td>
+                                                <td
+                                                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    {{ $categoria->created_at }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -69,11 +77,12 @@
                     </svg>
                 </button>
             </div>
-            <form class="mt-5">
+            <form class="mt-5" method="POST" action="{{route('register.category')}}">
+                @csrf
                 <div class="mb-4">
-                    <label for="categoryName" class="block text-sm font-medium text-gray-700">Nombre de la
+                    <label for="categoria" class="block text-sm font-medium text-gray-700">Nombre de la
                         Categoría</label>
-                    <input type="text" id="categoryName" name="categoryName"
+                    <input type="text" id="categoria" name="categoria"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 </div>
                 <div class="mt-4">

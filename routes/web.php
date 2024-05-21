@@ -47,6 +47,8 @@ Route::get('/productos', [ProductoController::class, 'index']);
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
 
+Route::post('/registrarcategoria', [CategoriaController::class, 'create'])->name('register.category');
+
 Route::post('/registrarproducto', [ProductoController::class, 'create'])->name('register.producto');
 
 Route::post('/buscarproducto', [ProductoController::class, 'busqueda'])->name('find.producto');
