@@ -34,7 +34,7 @@
                                     Número de telefono
                                 </th>
                                 <th scope="col"
-                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400" >
+                                    class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                     Modificar
                                 </th>
                             </tr>
@@ -42,7 +42,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($cliente as $cliente)
                                 <tr class="hover:bg-gray-100">
-                                    
+
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                                         {{ $cliente->identificacion }}
                                     </td>
@@ -56,14 +56,15 @@
                                         {{ $cliente->telefono }}
                                     </td>
                                     <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                        <a href="#" data-modal-toggle="authentication-modal-{{ $cliente->id }}">Modificar</a>
+                                        <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline"
+                                            data-modal-toggle="authentication-modal-{{ $cliente->id }}">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     <div class="max-w-2xl mx-auto">
-                        @foreach ($cliente as $cliente)
+                        @if ($cliente)
                             <!-- Main modal -->
                             <div id="authentication-modal-{{ $cliente->id }}" aria-hidden="true"
                                 class="hidden overflow-x-hidden overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center">
@@ -92,7 +93,8 @@
                                                     class="text-sm font-medium text-gray-900 block mb-2 ">Identificación</label>
                                                 <input type="number" name="identificacion" id="identificacion"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                    placeholder="258" required value="{{ $cliente->identificacion}}" disabled>
+                                                    placeholder="258" required value="{{ $cliente->identificacion }}"
+                                                    disabled>
                                             </div>
                                             <div>
                                                 <label for="nombre"
@@ -105,31 +107,49 @@
                                                 <label for="apellido"
                                                     class="text-sm font-medium text-gray-900 block mb-2">apellido
                                                 </label>
-                                                <input type="text" name="apellido" id="apellido"
-                                                    placeholder=""
+                                                <input type="text" name="apellido" id="apellido" placeholder=""
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                    required value="{{ $cliente->disponibilidad }}">
+                                                    required value="{{ $cliente->apellido }}">
                                             </div>
                                             <div>
-                                                <label for="celular"
+                                                <label for="telefono"
                                                     class="text-sm font-medium text-gray-900 block mb-2">celular
                                                 </label>
-                                                <input type="number" name="celular" id="celular" placeholder=""
+                                                <input type="number" name="telefono" id="telefono" placeholder=""
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                    required value="{{ $cliente->precio }}">
+                                                    required value="{{ $cliente->telefono }}">
                                             </div>
-                                            
+                                            <div>
+                                                <button type="submit"
+                                                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Modificar
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('[data-modal-toggle]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const modalId = button.getAttribute('data-modal-toggle');
+                    const modal = document.getElementById(modalId);
+                    if (modal.classList.contains('hidden')) {
+                        modal.classList.remove('hidden');
+                    } else {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

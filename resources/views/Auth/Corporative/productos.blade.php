@@ -133,7 +133,7 @@
                                                         onclick="return res()" class="text-red-500">Eliminar</a>
                                                     <a href="#"
                                                         class="text-blue-600 dark:text-blue-500 hover:underline"
-                                                        data-modal-toggle="authentication-modal-{{ $producto->id }}"">Edit</a>
+                                                        data-modal-toggle="authentication-modal-{{ $producto->id }}">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach

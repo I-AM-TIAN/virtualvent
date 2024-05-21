@@ -58,4 +58,12 @@ class ClientController extends Controller
     return view('auth.cliente.index')->with("cliente", $cliente);
   }
 
+  public function update(Request $request, $id)
+  {
+    $cliente = Cliente::find($id);
+    $cliente->update($request->all());
+
+    return redirect("/cliente");
+  }
+
 }
